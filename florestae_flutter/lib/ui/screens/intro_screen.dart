@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class _IntroSlide {
@@ -37,6 +38,9 @@ const _slides = [
   ),
 ];
 
+/// Duração de cada slide em segundos
+const _slideDuration = 4;
+
 class IntroScreen extends StatefulWidget {
   final VoidCallback onFinish;
 
@@ -46,14 +50,49 @@ class IntroScreen extends StatefulWidget {
   State<IntroScreen> createState() => _IntroScreenState();
 }
 
-class _IntroScreenState extends State<IntroScreen> {
+class _IntroScreenState extends State<IntroScreen>
+    with SingleTickerProviderStateMixin {
   int currentIndex = 0;
+
+  // Controle do temporizador
+  Timer? _autoAdvanceTimer;
+  late AnimationController _progressController;
+
+  @override
+  void initState() {
+    super.initState();
+    _progressController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: _slideDuration),
+    );
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _autoAdvanceTimer?.cancel();
+    _progressController.dispose();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _autoAdvanceTimer?.cancel();
+    _progressController.forward(from: 0);
+
+    _autoAdvanceTimer = Timer(
+      const Duration(seconds: _slideDuration),
+      () {
+        if (mounted) _next();
+      },
+    );
+  }
 
   void _next() {
     if (currentIndex < _slides.length - 1) {
       setState(() {
         currentIndex++;
       });
+      _startTimer();
     } else {
       widget.onFinish();
     }
@@ -64,6 +103,16 @@ class _IntroScreenState extends State<IntroScreen> {
       setState(() {
         currentIndex--;
       });
+      _startTimer();
+    }
+  }
+
+  void _goToSlide(int index) {
+    if (index != currentIndex) {
+      setState(() {
+        currentIndex = index;
+      });
+      _startTimer();
     }
   }
 
@@ -83,76 +132,112 @@ class _IntroScreenState extends State<IntroScreen> {
               const Spacer(),
 
               // Imagem ou ícone
-              if (slide.image != null)
-                Image.asset(
-                  slide.image!,
-                  width: 180,
-                  height: 180,
-                  fit: BoxFit.contain,
-                )
-              else
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF4A7C59).withValues(alpha: 0.12),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    slide.icon,
-                    size: 56,
-                    color: const Color(0xFF4A7C59),
-                  ),
-                ),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 400),
+                child: slide.image != null
+                    ? Image.asset(
+                        slide.image!,
+                        key: ValueKey('img_$currentIndex'),
+                        width: 180,
+                        height: 180,
+                        fit: BoxFit.contain,
+                      )
+                    : Container(
+                        key: ValueKey('icon_$currentIndex'),
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF4A7C59).withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          slide.icon,
+                          size: 56,
+                          color: const Color(0xFF4A7C59),
+                        ),
+                      ),
+              ),
 
               const SizedBox(height: 40),
 
               // Título
-              Text(
-                slide.title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2D3E2F),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: Text(
+                  slide.title,
+                  key: ValueKey('title_$currentIndex'),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2D3E2F),
+                  ),
                 ),
               ),
 
               const SizedBox(height: 16),
 
               // Descrição
-              Text(
-                slide.description,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF6B7C6D),
-                  height: 1.5,
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: Text(
+                  slide.description,
+                  key: ValueKey('desc_$currentIndex'),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF6B7C6D),
+                    height: 1.5,
+                  ),
                 ),
               ),
 
               const Spacer(),
 
-              // Indicadores de página
+              // Indicadores de página clicáveis
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(_slides.length, (index) {
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    width: currentIndex == index ? 20 : 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: currentIndex == index
-                          ? const Color(0xFF4A7C59)
-                          : const Color(0xFFB0BEC5),
-                      borderRadius: BorderRadius.circular(4),
+                  final isActive = currentIndex == index;
+                  return GestureDetector(
+                    onTap: () => _goToSlide(index),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      width: isActive ? 20 : 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: isActive
+                            ? const Color(0xFF4A7C59)
+                            : const Color(0xFFB0BEC5),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
                     ),
                   );
                 }),
               ),
 
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
+
+              // Barra de progresso do temporizador
+              AnimatedBuilder(
+                animation: _progressController,
+                builder: (context, _) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: LinearProgressIndicator(
+                      value: _progressController.value,
+                      minHeight: 4,
+                      backgroundColor: const Color(0xFFB0BEC5).withValues(alpha: 0.4),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        Color(0xFF4A7C59),
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 20),
 
               // Botões
               Row(
