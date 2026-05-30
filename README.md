@@ -81,7 +81,7 @@ Splash → Onboarding (4 slides) → Home → Detalhe da Área
 
 ### Tela 1 — Splash Screen
 
-Tela de boas-vindas exibida na inicialização do app. Apresenta a logo do Florestae com o slogan "Monitoramento ambiental do Brasil em tempo real." e avança automaticamente para o onboarding.
+Tela de boas-vindas exibida na inicialização do app. Apresenta a logo do Florestae com o slogan "Monitoramento ambiental do Brasil em tempo real." e avança para o onboarding. Com temporizador de 3 segundos para passar para próxima tela sozinho.
 
 > **Rota:** `/` 
 
