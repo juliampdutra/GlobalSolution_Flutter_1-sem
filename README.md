@@ -91,7 +91,7 @@ Tela de boas-vindas exibida na inicialização do app. Apresenta a logo do Flore
 
 ### Tela 2 — Onboarding: Bem-vindo ao Florestae
 
-Primeiro slide do onboarding com a ilustração do Satélite. Introduz o conceito do app ao usuário. Possui botões **Voltar** e **Próximo**.
+Primeiro slide do onboarding com a ilustração do Satélite. Introduz o conceito do app ao usuário. Com temporizador de 3 segundos para passar para próxima tela sozinho. Também possui botões **Voltar** e **Próximo**.
 > **Rota:** `/intro` 
 
 ![Tela 2 - Onboarding 1](https://github.com/juliampdutra/GlobalSolution_Flutter_1-sem/blob/8bff957d29d67acd13778ed50535a5c38e1e4969/tela2.jpeg)
@@ -100,7 +100,7 @@ Primeiro slide do onboarding com a ilustração do Satélite. Introduz o conceit
 
 ### Tela 3 — Onboarding: Monitoramento  de CO₂
 
-Segundo slide do onboarding. Apresenta o ícone de CO₂ e informa que o app permite acompanhar as fontes de emissão por categoria. Possui botões **Voltar** e **Próximo**.
+Segundo slide do onboarding. Apresenta o ícone de CO₂ e informa que o app permite acompanhar as fontes de emissão por categoria. Com temporizador de 3 segundos para passar para próxima tela sozinho. Também possui botões **Voltar** e **Próximo**.
 
 > **Rota:** `/intro` 
 
@@ -109,7 +109,7 @@ Segundo slide do onboarding. Apresenta o ícone de CO₂ e informa que o app per
 
 ### Tela 4 — Onboarding: Dados por Bioma
 
-Quarto e último slide do onboarding. Apresenta o ícone de gráfico de barras e informa que é possível filtrar por Amazônia, Cerrado, Mata Atlântica e mais. Botão **Começar** navega para a tela principal.
+Quarto e último slide do onboarding. Apresenta o ícone de gráfico de barras e informa que é possível filtrar por Amazônia, Cerrado, Mata Atlântica e mais. Com temporizador de 3 segundos para passar para próxima tela sozinho. Também possui botão **Começar** que navega para a tela principal.
 
 > **Rota:** `/intro`
 
