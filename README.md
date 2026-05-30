@@ -1,6 +1,6 @@
 # 🌿 Florestae
 
-> Monitoramento ambiental do Brasil em tempo real.
+Monitoramento ambiental do Brasil em tempo real.
 
 Aplicação Flutter desenvolvida para o monitoramento de desmatamento e emissões de carbono no Brasil. Através de dados mockados de satélites e sensores ambientais, o app permite visualizar áreas críticas e acompanhar as principais fontes de emissão de CO₂ por categoria e bioma.
 
