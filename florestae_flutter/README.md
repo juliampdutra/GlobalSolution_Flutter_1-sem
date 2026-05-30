@@ -85,7 +85,8 @@ Tela de boas-vindas exibida na inicialização do app. Apresenta a logo do Flore
 
 > **Rota:** `/` (splash)
 
-![Tela 1 - Splash]
+![Tela 1 - Splash](<img width="923" height="1048" alt="tela1" src="https://github.com/user-attachments/assets/b3ba4fb0-ca07-4b72-96fc-1c663fe129d7" />)
+
 
 ---
 
