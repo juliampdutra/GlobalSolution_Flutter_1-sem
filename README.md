@@ -85,7 +85,7 @@ Tela de boas-vindas exibida na inicialização do app. Apresenta a logo do Flore
 
 > **Rota:** `/` 
 
-![Tela 1 - Splash]()
+![Tela 1 - Splash](https://github.com/juliampdutra/GlobalSolution_Flutter_1-sem/blob/0f9223c86cfc76e63842f9c13dee076ed51214fa/tela1_.png)
 
 ---
 
@@ -94,7 +94,7 @@ Tela de boas-vindas exibida na inicialização do app. Apresenta a logo do Flore
 Primeiro slide do onboarding com a ilustração do Satélite. Introduz o conceito do app ao usuário. Com temporizador de 3 segundos para passar para próxima tela sozinho. Também possui botões **Voltar** e **Próximo**.
 > **Rota:** `/intro` 
 
-![Tela 2 - Onboarding 1]()
+![Tela 2 - Onboarding 1](https://github.com/juliampdutra/GlobalSolution_Flutter_1-sem/blob/0f9223c86cfc76e63842f9c13dee076ed51214fa/tela2_.png)
 
 ---
 
@@ -104,7 +104,7 @@ Segundo slide do onboarding. Apresenta o ícone de CO₂ e informa que o app per
 
 > **Rota:** `/intro` 
 
-![Tela 3 - Onboarding 2]()
+![Tela 3 - Onboarding 2](https://github.com/juliampdutra/GlobalSolution_Flutter_1-sem/blob/0f9223c86cfc76e63842f9c13dee076ed51214fa/tela3_.png)
 ---
 
 ### Tela 4 — Onboarding: Dados por Bioma
@@ -113,7 +113,7 @@ Quarto e último slide do onboarding. Apresenta o ícone de gráfico de barras e
 
 > **Rota:** `/intro`
 
-![Tela 4 - Onboarding 3]()
+![Tela 4 - Onboarding 3](https://github.com/juliampdutra/GlobalSolution_Flutter_1-sem/blob/0f9223c86cfc76e63842f9c13dee076ed51214fa/tela4_.png)
 
 ---
 
